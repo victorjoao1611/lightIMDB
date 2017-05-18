@@ -13,6 +13,7 @@ libraryDependencies += evolutions
 libraryDependencies += jdbc
 libraryDependencies += "com.typesafe.play" %% "anorm" % "2.5.1"
 libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.27"
+libraryDependencies += "org.webjars" % "bootstrap" % "3.3.7"
 
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "br.unb.cic.controllers._"

@@ -14,19 +14,19 @@ import javax.inject.Singleton
 
 /**
  * A definicao da classe Filme, que corresponde 
- * a uma entidade cujo estado deve ser salvo na 
- * base de dados. 
+ * a uma entidade cujo estado deve ser salvo no 
+ * banco de dados. 
  */
-case class Filme(id: Int, titulo: String, diretor: String, ano_producao: Int) 
+case class Filme(id: Int, titulo: String, diretor: String, anoProducao: Int) 
 
 /**
  * Um DAO para a classe de entidade Filme. 
  */
-object FilmeDAO {
+class FilmeDAO @Inject() (database: Database){
   val parser : RowParser[models.Filme] = Macro.namedParser[models.Filme]
   
-  def listar  = DB.withConnection { implicit connection => 
-    SQL"SELECT * FROM TB_FILME".as(parser.*)
+  def listar  = database.withConnection { implicit connection => 
+    SQL"SELECT ID, TITULO, DIRETOR, ANO_PRODUCAO AS anoProducao FROM TB_FILME".as(parser.*)
   }
 
 }
