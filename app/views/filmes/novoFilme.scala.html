@@ -1,9 +1,14 @@
 @* novoFilme Template File *@
 @(filmeForm: Form[FilmeVO])(implicit messages: Messages)
 
+@main("Novo filme") {
+ @helper.form(action = routes.FilmeController.novoFilmeSubmissao()) {
+  @helper.inputText(filmeForm("Titulo"))
+  @helper.inputText(filmeForm("Diretor"))
+  @helper.inputText(filmeForm("Ano"))
 
-@helper.form(action = routes.FilmeController.novoFilmeSubmissao()) {
-  @helper.inputText(filmeForm("titulo"))
-  @helper.inputText(filmeForm("descricao"))
-  @helper.inputText(filmeForm("ano"))
+  <div class="form-actions">
+    <button type="submit">Cadastrar novo filme</button> 
+  </div>
+ }
 }

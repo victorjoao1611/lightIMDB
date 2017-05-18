@@ -37,8 +37,10 @@ class FilmeController @Inject()(dao: FilmeDAO, val messagesApi: MessagesApi) ext
         BadRequest(views.html.filmes.novoFilme(formWithErrors))
       },
       filme => {
+        val novoFilme = Filme(0, filme.titulo, filme.diretor, filme.ano)
+        dao.salvar(novoFilme)
         var filmes = dao.listar
-        Ok(views.html.filmes.listagem(filmes))
+        Created(views.html.filmes.listagem(filmes))
     }
   )
     
@@ -46,9 +48,9 @@ class FilmeController @Inject()(dao: FilmeDAO, val messagesApi: MessagesApi) ext
   
   val filmeForm = Form(
     mapping(
-      "titulo"  -> nonEmptyText,
-      "diretor" -> nonEmptyText,
-      "ano" -> number(min=1950, max=2050)
+      "Titulo"  -> nonEmptyText,
+      "Diretor" -> nonEmptyText,
+      "Ano" -> number(min=1950, max=2050)
     )(FilmeVO.apply)(FilmeVO.unapply)    
   )
 }

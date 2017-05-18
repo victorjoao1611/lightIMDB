@@ -25,7 +25,16 @@ case class Filme(id: Int, titulo: String, diretor: String, anoProducao: Int)
 class FilmeDAO @Inject() (database: Database){
   val parser : RowParser[models.Filme] = Macro.namedParser[models.Filme]
   
-  def listar  = database.withConnection { implicit connection => 
+  def salvar(filme: Filme) = database.withConnection { implicit connection => 
+    val id: Option[Long] = SQL(
+        """INSERT INTO TB_FILME(TITULO, DIRETOR, ANO_PRODUCAO) 
+            values ({titulo}, {diretor}, {anoProducao})""")
+     .on('titulo -> filme.titulo, 
+         'diretor -> filme.diretor, 
+         'anoProducao -> filme.anoProducao).executeInsert()
+  }
+  
+  def listar = database.withConnection { implicit connection => 
     SQL"SELECT ID, TITULO, DIRETOR, ANO_PRODUCAO AS anoProducao FROM TB_FILME".as(parser.*)
   }
 

@@ -1,7 +1,7 @@
 @* listagem Template File *@
 @(filmes: List[Filme])
 
-@main("Foo") {
+@main("IMDB") {
    <ul>
      @for(filme <- filmes) {
        <li>@filme.titulo - @filme.diretor - @filme.anoProducao</li> 
