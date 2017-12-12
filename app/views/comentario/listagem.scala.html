@@ -1,0 +1,13 @@
+@* listagem Template File *@
+@(comentarios: List[Comentario])
+
+@main("IMDB") {
+    <h1>Comentários</h1>
+    <div class="row">
+        @for(comentario <- comentarios) {
+            <div class="col-xs-12 col-sm-12">
+                <p>@comentario.email - @comentario.titulo - @comentario.comentario</p>
+            </div>
+        }
+    </div>
+}

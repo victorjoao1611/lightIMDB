@@ -1,0 +1,14 @@
+@(usuarios: List[Usuario])
+@main("IMDB rocks on Play :)") {
+    @if(!usuarios.isEmpty) {
+        @for(usuario <- usuarios) {
+            @UsuarioLogado.setEmail(usuario.email)
+            @UsuarioLogado.setSenha(usuario.senha)
+        }
+    } else {
+        @UsuarioLogado.email = ""
+        @UsuarioLogado.senha = ""
+    }
+    <h1>Bem vindo ao (pseudo) sistema IMDB!</h1>
+    <a href="/filme">Ver todos os filmes</a>
+}

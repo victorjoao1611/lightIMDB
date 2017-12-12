@@ -6,9 +6,27 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 
-GET     /filme                     controllers.FilmeController.listar
-GET		/filme/novo                controllers.FilmeController.novoFilme
-POST	/filme                     controllers.FilmeController.novoFilmeSubmissao
+GET     /usuario                    controllers.UsuarioController.listar
+GET		/usuario/novo               controllers.UsuarioController.novoUsuario
+POST	/usuario                    controllers.UsuarioController.novoUsuarioSubmissao
+GET     /usuario/login              controllers.UsuarioController.loginUsuario
+GET     /usuario/logout             controllers.UsuarioController.logoutUsuario
+POST    /usuario/login              controllers.UsuarioController.loginUsuarioSubmissao
+
+GET     /filme                      controllers.FilmeController.listar
+GET		/filme/novo                 controllers.FilmeController.novoFilme
+POST	/filme                      controllers.FilmeController.novoFilmeSubmissao
+GET     /filme/:id                  controllers.FilmeController.procurar(id : Int)
+POST    /filme/upload               controllers.FilmeController.uploadImagem(id : Int)
+
+
+GET     /avaliacao/:id              controllers.AvaliacaoController.procurar(id : Int)
+POST	/avaliacao                  controllers.AvaliacaoController.novaAvaliacaoSubmissao
+
+GET     /comentario                 controllers.ComentarioController.listar
+GET		/comentario/novo            controllers.ComentarioController.novoComentario
+POST	/comentario                 controllers.ComentarioController.novoComentarioSubmissao
+GET     /comentario/:id             controllers.ComentarioController.procurar(id : Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

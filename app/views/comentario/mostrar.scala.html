@@ -1,0 +1,15 @@
+@* listagem Template File *@
+@(comentarios: List[Comentario])
+
+@main("IMDB") {
+    <h1>Comentários</h1>
+    <div class="row">
+        @if(comentarios.isEmpty) {
+            <h3>Nenhum comentário encontrado</h3>
+        }
+        @for(comentario <- comentarios) {
+            <h3>@comentario.email</h3>
+            <p>@comentario.comentario</p>
+        }
+    </div>
+}

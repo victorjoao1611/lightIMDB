@@ -1,0 +1,14 @@
+@* novoComentario Template File *@
+@(comentarioForm: Form[ComentarioVO])(implicit messages: Messages)
+
+@main("Novo comentario") {
+    @helper.form(action = routes.ComentarioController.novoComentarioSubmissao()) {
+        @helper.inputText(comentarioForm("Titulo"))
+        @helper.inputText(comentarioForm("Email"))
+        @helper.inputText(comentarioForm("Comentario"))
+
+        <div class="form-actions">
+            <button type="submit">Comentar</button>
+        </div>
+    }
+}

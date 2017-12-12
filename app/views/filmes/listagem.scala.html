@@ -2,9 +2,25 @@
 @(filmes: List[Filme])
 
 @main("IMDB") {
-   <ul>
-     @for(filme <- filmes) {
-       <li>@filme.titulo - @filme.diretor - @filme.anoProducao</li> 
-     }
-   </ul>
+    @if(filmes.isEmpty) {
+        <h1>Nenhum filme cadastrado.</h1>
+    } else {
+        @for(filme <- filmes) {
+        <p>
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <a href="/filme/@filme.id">
+                        <img src="@routes.Assets.versioned("images/" + filme.id.toString + ".jpg")" alt="@filme.titulo"
+                        height="386px" width="250px"/>
+                    </a>
+                </div>
+                <div class="col-xs-6 col-md-8">
+                    <a href="/filme/@filme.id"><h1>@filme.titulo</h1></a>
+                    <h3>@filme.diretor</h3>
+                    <h3>@filme.anoProducao</h3>
+                </div>
+            </div>
+        </p>
+        }
+    }
 }

@@ -2,13 +2,18 @@
 @(filmeForm: Form[FilmeVO])(implicit messages: Messages)
 
 @main("Novo filme") {
- @helper.form(action = routes.FilmeController.novoFilmeSubmissao()) {
-  @helper.inputText(filmeForm("Titulo"))
-  @helper.inputText(filmeForm("Diretor"))
-  @helper.inputText(filmeForm("Ano"))
+    @if(UsuarioLogado.email != "") {
+    @helper.form(action = routes.FilmeController.novoFilmeSubmissao()) {
+        @helper.inputText(filmeForm("Titulo"))
+        @helper.inputText(filmeForm("Diretor"))
+        @helper.inputText(filmeForm("Ano"))
+        <p><textarea name="Descricao" rows="5"></textarea></p>
 
-  <div class="form-actions">
-    <button type="submit">Cadastrar novo filme</button> 
-  </div>
- }
+        <div class="form-actions">
+            <button type="submit">Cadastrar novo filme</button>
+        </div>
+    }
+    } else {
+        <h1>Error 404.<a href="/">Voltar a página inicial.</a></h1>
+    }
 }

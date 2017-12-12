@@ -17,7 +17,7 @@ import javax.inject.Singleton
  * a uma entidade cujo estado deve ser salvo no 
  * banco de dados. 
  */
-case class Filme(id: Int, titulo: String, diretor: String, anoProducao: Int) 
+case class Filme(id: Int, titulo: String, diretor: String, anoProducao: Int, descricao: String)
 
 /**
  * Um DAO para a classe de entidade Filme. 
@@ -27,15 +27,21 @@ class FilmeDAO @Inject() (database: Database){
   
   def salvar(filme: Filme) = database.withConnection { implicit connection => 
     val id: Option[Long] = SQL(
-        """INSERT INTO TB_FILME(TITULO, DIRETOR, ANO_PRODUCAO) 
-            values ({titulo}, {diretor}, {anoProducao})""")
-     .on('titulo -> filme.titulo, 
+        """INSERT INTO TB_FILME(TITULO, DIRETOR, ANO_PRODUCAO, DESCRICAO)
+            values ({titulo}, {diretor}, {anoProducao}, {descricao})""").on(
+         'titulo -> filme.titulo,
          'diretor -> filme.diretor, 
-         'anoProducao -> filme.anoProducao).executeInsert()
+         'anoProducao -> filme.anoProducao,
+         'descricao -> filme.descricao).executeInsert()
   }
   
   def listar = database.withConnection { implicit connection => 
-    SQL"SELECT ID, TITULO, DIRETOR, ANO_PRODUCAO AS anoProducao FROM TB_FILME".as(parser.*)
+    SQL("SELECT ID, TITULO, DIRETOR, ANO_PRODUCAO AS anoProducao, DESCRICAO AS descricao FROM TB_FILME").as(parser.*)
+  }
+
+  def procurar(id : Int) = database.withConnection { implicit connection =>
+    SQL("SELECT ID, TITULO, DIRETOR, DESCRICAO, ANO_PRODUCAO AS anoProducao FROM TB_FILME WHERE ID = {id}").on(
+      'id -> id).as(parser.*)
   }
 
 }

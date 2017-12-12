@@ -1,0 +1,10 @@
+@* listagem Template File *@
+@(usuarios: List[Usuario])
+
+@main("IMDB") {
+<ul>
+    @for(usuario <- usuarios) {
+    <li>@usuario.email</li>
+    }
+</ul>
+}

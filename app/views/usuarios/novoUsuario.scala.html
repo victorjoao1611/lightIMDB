@@ -1,0 +1,13 @@
+@* novoUsuario Template File *@
+@(usuarioForm: Form[UsuarioVO])(implicit messages: Messages)
+
+@main("Novo usuario") {
+@helper.form(action = routes.UsuarioController.novoUsuarioSubmissao()) {
+@helper.inputText(usuarioForm("Email"))
+@helper.inputText(usuarioForm("Senha"))
+
+<div class="form-actions">
+    <button type="submit">Cadastrar novo usuario</button>
+</div>
+}
+}
